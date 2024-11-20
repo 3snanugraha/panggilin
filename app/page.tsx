@@ -1,100 +1,127 @@
+'use client';
 import Image from "next/image";
+import { useState } from "react";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [services] = useState([
+    { name: "Jasa Tukang", image: "/tukang-services.svg" },
+    { name: "Jasa Pungut Sampah", image: "/cleaning-services.svg" },
+    { name: "Jasa Kebersihan", image: "/cleaninghome-services.svg" },
+    // Tambahkan jasa lainnya
+  ]);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  return (
+    <div className="min-h-screen flex flex-col">
+      {/* Header */}
+      <header className="bg-gray-800 text-white p-4 flex items-center justify-between">
+        <div className="text-2xl font-bold">Panggilin</div>
+        <a 
+          href="/signup" 
+          className="bg-[#7E57C2] hover:bg-[#6D4BBF] text-white py-2 px-4 rounded-full"
+        >
+          Daftar
+        </a>
+      </header>
+
+      {/* Hero Section */}
+      <section id="hero" className="flex items-center justify-between h-screen bg-gray-100 p-8">
+        {/* Kiri: Title dan Button */}
+        <div className="flex-1 text-left">
+          <h1 className="text-5xl font-extrabold text-gray-800">
+            Temukan Jasa Terbaik <br /> dengan Panggilin
+          </h1>
+          <p className="mt-4 text-lg text-gray-600">
+            Kami membantu Anda menghubungkan dengan penyedia jasa profesional untuk berbagai kebutuhan.
+          </p>
+          <a 
+            href="#services" 
+            className="mt-6 inline-block bg-[#7E57C2] hover:bg-[#6D4BBF] text-white py-3 px-6 rounded-full"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
+            Lihat Jasa
           </a>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+
+        {/* Kanan: Gambar/SVG */}
+        <div className="flex-1 flex justify-center">
           <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+            src="/services.svg"
+            alt="Hero Illustration"
+            width={500}
+            height={500}
+            className="w-full h-auto"
           />
-          Learn
+        </div>
+      </section>
+
+      {/* Jasa yang Tersedia */}
+      <section id="services" className="p-8 bg-gray-100">
+        <h2 className="text-3xl font-bold text-center text-gray-800">Jasa yang Tersedia</h2>
+        <p className="text-center text-gray-600 mt-2">
+          Pilih layanan yang sesuai dengan kebutuhan Anda.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+          {services.map((service, index) => (
+            <div 
+              key={index} 
+              className="bg-white shadow-lg rounded-xl overflow-hidden transform hover:scale-105 transition-transform flex flex-col items-center text-center"
+            >
+              <div className="relative w-full h-48">
+                <Image 
+                  src={service.image} 
+                  alt={service.name} 
+                  layout="fill" 
+                  objectFit="contain" 
+                  className="p-4"
+                />
+              </div>
+              <div className="p-4 flex flex-col items-center">
+                <h4 className="font-semibold text-lg text-gray-800">{service.name}</h4>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Cara Kerja */}
+      <section id="how-it-works" className="p-8 bg-white">
+        <h2 className="text-3xl font-bold text-center text-gray-800">Cara Kerja Panggilin</h2>
+        <div className="flex flex-wrap justify-around mt-8 w-full">
+          {[
+            { step: "1", title: "Daftar Akun", desc: "Buat akun Anda untuk mulai menggunakan layanan kami." },
+            { step: "2", title: "Cari Jasa", desc: "Pilih jasa sesuai kebutuhan Anda dari berbagai mitra terpercaya." },
+            { step: "3", title: "Hubungi Mitra", desc: "Komunikasikan langsung dengan mitra untuk detail lebih lanjut." },
+            { step: "4", title: "Nikmati Layanan", desc: "Terima layanan berkualitas dari mitra kami." },
+          ].map((item) => (
+            <div key={item.step} className="flex flex-col items-center basis-full md:basis-1/4 text-center w-1/4 p-4">
+              <div className="text-4xl font-bold bg-[#7E57C2] text-white w-12 h-12 flex items-center justify-center rounded-full">
+                {item.step}
+              </div>
+              <h3 className="mt-4 text-xl font-semibold text-gray-800">{item.title}</h3>
+              <p className="mt-2 text-gray-600">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Daftar Sekarang */}
+      <section id="signup" className="bg-[#7E57C2] text-white p-12 text-center">
+        <h2 className="text-3xl font-bold">Daftar Sekarang dan Temukan Solusi Terbaik</h2>
+        <p className="mt-4 text-lg">
+          Bergabunglah dengan kami dan nikmati berbagai layanan berkualitas.
+        </p>
+        <a href="/signup" className="mt-6 inline-block bg-white text-[#7E57C2] hover:bg-gray-200 py-3 px-6 rounded-full">
+          Daftar Sekarang
         </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-800 text-white p-6 text-center">
+        <p>&copy; {new Date().getFullYear()} Panggilin. Semua hak dilindungi.</p>
+        <div className="flex justify-center space-x-4 mt-4">
+          <a href="#" className="hover:underline">Kebijakan Privasi</a>
+          <a href="#" className="hover:underline">Syarat & Ketentuan</a>
+          <a href="#" className="hover:underline">Kontak Kami</a>
+        </div>
       </footer>
     </div>
   );
