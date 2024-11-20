@@ -28,6 +28,9 @@ export const metadata: Metadata = {
     "hubungi penyedia jasa",
     "booking jasa online"
   ],
+  icons: {
+    icon: '/favicon.png',
+  },
   authors: [
     {
       name: "Panggilin Team", 
