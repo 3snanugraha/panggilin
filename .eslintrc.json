@@ -1,3 +1,27 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "extends": [
+    "next/core-web-vitals", // Web vitals rules for Next.js
+    "next/typescript" // TypeScript-specific linting for Next.js
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json" // Use your project's tsconfig.json for type checking
+  },
+  "rules": {
+    // Disable or adjust rules as needed
+    "no-console": "off", // Allow console logs during development
+    "react/react-in-jsx-scope": "off", // React 17 JSX pragma no longer required in Next.js
+    "react/jsx-uses-react": "off", // No need to import React in JSX files in Next.js
+    "react/jsx-uses-vars": "off", // No need for unused JSX vars check
+    "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }], // Warn for unused vars except for those prefixed with '_'
+    "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }], // Ensure unused variable check works for TypeScript
+    "@typescript-eslint/explicit-module-boundary-types": "off" // Disable explicit return type enforcement for simplicity
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"], // Only apply the following to TypeScript files
+      "rules": {
+        "@typescript-eslint/explicit-module-boundary-types": "warn" // Enforce return types for functions in TypeScript files
+      }
+    }
+  ]
 }
